@@ -16,6 +16,8 @@ if(isset($_POST['register_btn'])){
             'message' => 'Email is already registred'
         ];
         $_SESSION['active_form'] = 'register';
+        header('Location: cadastro.php');
+        exit();
     } else{
         $conn->query("INSERT INTO users (name, email, password) VALUES ('$name', '$email', '$password')");
         $_SESSION['alerts'][] =[
@@ -23,9 +25,9 @@ if(isset($_POST['register_btn'])){
             'message' => 'Registrations successful'
         ];
         $_SESSION['active_form'] = 'login';
+        header('Location: ../index.html');
+        exit();
     }
-    header('Location: cadastro.php');
-    exit();
 }
 
 if (isset($_POST['login_btn'])){
@@ -41,15 +43,18 @@ if (isset($_POST['login_btn'])){
             'type' => 'success',
             'message' => 'Login successful'
         ];
+        header('Location: ../index.html');
+        exit();
      } else{
         $_SESSION['alerts'][] = [
             'type' => 'error',
             'message' => 'Incorrect email or password!'
         ];
         $_SESSION['active_form'] = 'login';
+        header('Location: cadastro.php');
+        exit();
      }
-     header('Location: cadastro.php');
-     exit();
+     
 }
 
 
